@@ -66,10 +66,19 @@ body {
     font-size: 15px;
     min-height: 100vh;
     position: relative;
+    margin-bottom: 70px;
+}
+
+.color-svg-white {
+    filter: invert(94%) sepia(47%) saturate(0%) hue-rotate(244deg) brightness(103%) contrast(101%);
 }
 
 .color-svg-blue {
-    filter: invert(23%) sepia(10%) saturate(2163%) hue-rotate(182deg) brightness(93%) contrast(94%);
+    filter: invert(20%) sepia(6%) saturate(4279%) hue-rotate(182deg) brightness(98%) contrast(86%);
+}
+
+.color-svg-green {
+    filter: invert(64%) sepia(14%) saturate(1889%) hue-rotate(104deg) brightness(102%) contrast(79%);
 }
 
 main {
@@ -203,7 +212,7 @@ th {
 }
 
 /* ===== WAVEFORM SECTION ===== */
-.waveform {
+/* .waveform {
     border: solid 1px #38C48B;
     border-radius: 12px;
     height: 100px;
@@ -214,8 +223,7 @@ th {
 .waveform img {
     width: 100%;
     height: auto;
-    display: none;
-}
+} */
 
 /* ===== NAVIGATION MENU ===== */
 .nav-bar {
@@ -223,11 +231,17 @@ th {
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    height: 40px;
+    height: 50px;
     background-color: #85899C;
+    position: fixed;
+    bottom: 0;
 }
 
 .nav-bar img {
     height: 20px;
+}
+
+#profile {
+    color: #2F3E5C;
 }
 
