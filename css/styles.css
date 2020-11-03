@@ -62,7 +62,7 @@ html {
 
 body {
     background-color: #2F3E5C;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     min-height: 100vh;
     position: relative;
@@ -117,7 +117,7 @@ a:hover {
     font-family: Digital display;
     margin: 10px;
     padding: 20px;
-    color: #FFF;
+    color: #FFFFFF;
     background-color: #2F3E5C;
     border-radius: 10px;
     letter-spacing: 3px;
@@ -126,7 +126,7 @@ a:hover {
 }
 
 /* ===== ADD A NEW SONG SECTION ===== */
-.add-song-icon {
+.add-song-btn {
     height: 20px;
     width: 20px;
     margin: 10px auto;
@@ -134,6 +134,22 @@ a:hover {
     background-color: #38C48B;
     border-radius: 50%;
     padding: 8px;
+    position: relative;
+    z-index: 5;
+}
+
+.add-song-text {
+    text-align: center;
+    margin: 15px 0;
+    color: #38C48B
+}
+
+.add-song-text a {
+    color: #38C48B;
+}
+
+.add-song-text a:hover {
+    font-weight: initial;
 }
 
 /* ===== TRACK SECTION ===== */
@@ -241,7 +257,163 @@ th {
     height: 20px;
 }
 
-#profile {
-    color: #2F3E5C;
+/* FORM: ADD A NEW SONG (MODAL WINDOW) */
+
+/* 
+.modal-container {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.close-x {
+    font-size: 3rem;
+    transform: rotate(45deg);
+    text-align: center;
+    cursor: pointer;
+    color: #38C48B;
+}
+
+.form-title {
+    text-transform: uppercase;
+    color: #38C48B;
+    margin: 30px 0;
+}
+
+.modal-content input {
+    display: block;
+    border-radius: 50px;
+    margin-bottom: 15px; 
+    border: solid 1px #38C48B;
+    height: 35px;
+    padding-left: 17px;
+    background-color: #85899C;
+}
+
+::placeholder {
+    color: #FFFFFF;
+    opacity: 1;
+}
+*/
+
+/* FORM/MODAL WINDOW - ADD A NEW SONG*/
+
+.modal-container {
+     background-color: #2F3E5C;
+     height: 100%;
+     width: 100%;
+     z-index: 0;
+     position: absolute;
+     top: 141px;
+     visibility: hidden;
+}
+
+.modal-content {
+    border: 1px solid #38C48B;
+    background-image: linear-gradient(to top, #2F3E5C 87%, #85899C 100%);
+    border-radius: 10px;
+    margin: 0 10px;
+    padding-bottom: 40px;
+}
+
+/* .close-x {
+    font-size: 3rem;
+    transform: rotate(45deg);
+    text-align: center;
+    cursor: pointer;
+    color: red;
+
+    height: 20px;
+    width: 20px;
+    padding: 8px;
+    border-radius: 50px;
+    background-color: yellow;
+
+    z-index: 11;
+} */
+
+/* copiado aquí este botón para usar sus estilos en close-x
+.add-song-btn {
+    height: 20px;
+    width: 20px;
+    margin: 10px auto;
+    
+    background-color: #38C48B;
+    border-radius: 50%;
+    padding: 8px;
+    position: relative;
+    z-index: 5;
+}
+*/
+
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+}
+
+.form-title {
+    color: #38C48B;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 32px 0 10px;
+}
+
+.form p {
+    color: #38C48B;
+    text-align: center;
+    padding: 12px;
+}
+
+.form input {
+    height: 35px;
+    border-radius: 50px;
+    background-color: #2F3E5C;
+    color: yellow;
+    margin: 8px;
+    padding-left: 17px;
+    border: 1px solid #6A7186;
+    font-family: 'Nunito', sans-serif;
+    font-weight: lighter;
+    letter-spacing: 0.8px;
+}
+
+::placeholder {
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+.add-audio-file-btn {
+    align-self: center;
+    height: 36px;
+    width:  36px;
+    border: solid 1px #FFFFFF;
+    border-radius: 50%;
+    background-color: #38C48B;
+    cursor: pointer;
+}
+
+.btn {
+    align-self: center;
+    color: #2F3E5C !important;
+    background: #38C48B !important;
+    font-weight: 700 !important;
+    border: none !important;
+    width: 150px;
+    cursor: pointer;
+    position: absolute;
+    top: 503px;
 }
 

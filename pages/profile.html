@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
     <title>Profile | TYLI</title>
 </head>
 
@@ -25,10 +26,13 @@
     <main>
         <!-- SECTION: ADD A NEW SONG -->
         <section id="add-song-section">
-            <div class="add-song-icon">
+            <div class="add-song-btn" onclick="toggleForm()">
                 <a href="#">
                     <img class="color-svg-blue" src="../assets/icons/add.svg" alt="add a new track button">
                 </a>
+            </div>
+            <div class="add-song-text" onclick="toggleForm()">
+                <a href="#">ADD YOUR MUSIC</a>
             </div>
         </section>
 
@@ -299,6 +303,59 @@
         </div>
     </aside>
 
+    <!-- MODAL FORM: ADD A NEW SONG -->
+    <div class="modal-container">
+        <div class="modal-content">
+
+            <!-- <div class="close-x">+</div> -->
+            <div class="form-title">New song details</div>
+
+            <form class="form" action="">
+
+
+                <!-- <label for="title">title</label> -->
+                <input type="text" name="title" id="title" placeholder="title" required>
+
+                <!-- <label for="genre">genre</label> -->
+                <input type="text" name="genre" id="genre" placeholder="genre" required>
+
+                <p>which tools have you used</p>
+                <!-- <label for="software"></label> -->
+                <input type="text" name="software" id="software" placeholder="software" required>
+
+                <!-- <label for="hardware"></label> -->
+                <input type="text" name="hardware" id="hardware" placeholder="hardware" required>
+
+                <p>inspiration</p>
+                <!-- <label for="inspiration"></label> -->
+                <input type="text" name="inspiration" id="inspiration" placeholder="artists, songs, albums, etc"
+                    required>
+
+                <p>ADD AUDIO FILE</p>
+
+                <svg class="add-audio-file-btn" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" fill="#FFFFFF"
+                    viewBox="-200 -200 912.171 912.171" style="enable-background:new 0 0 512.171 512.171;"
+                    xml:space="preserve">
+                    <g>
+                        <g>
+                            <path d="M476.723,216.64L263.305,3.115C261.299,1.109,258.59,0,255.753,0c-2.837,0-5.547,1.131-7.552,3.136L35.422,216.64
+			c-3.051,3.051-3.947,7.637-2.304,11.627c1.664,3.989,5.547,6.571,9.856,6.571h117.333v266.667c0,5.888,4.779,10.667,10.667,10.667
+			h170.667c5.888,0,10.667-4.779,10.667-10.667V234.837h116.885c4.309,0,8.192-2.603,9.856-6.592
+			C480.713,224.256,479.774,219.691,476.723,216.64z" />
+                        </g>
+                    </g>
+                </svg>
+
+                <!-- aquí botón SAVE para guardar/enviar formulario -->
+                <input type="submit" name="submit" value="SAVE" class="btn">
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- NAVIGATION MENU -->
     <nav id="nav-bar">
         <ul class="nav-bar">
             <li id="home">
@@ -328,6 +385,8 @@
             </li>
         </ul>
     </nav>
+
+    <script src="../js/profile.js"></script>
 
 </body>
 
