@@ -200,6 +200,7 @@ a:hover {
     padding-left: 17px;
     margin-bottom: 15px;
     max-height: 35px;
+    overflow: visible;
 }
 
 .track-title {
@@ -219,6 +220,7 @@ a:hover {
 .track-open {
     display: flex;
     margin-bottom: 15px;
+    line-height: 25px;
 }
 
 .track-info {
@@ -235,6 +237,10 @@ th {
     font-weight: bold;
     text-align: left;
     padding: 5px;
+}
+
+tr {
+    /* border-bottom: 1px solid; */
 }
 
 .track-info-buttons {
