@@ -105,35 +105,25 @@ const printDB = () => {
                         </div>
                         <!-- track info BUTTONS when open -->
                         <div class="track-info-buttons">
-                            <div class="track-info-delete-btn">
+                            <div class="track-info-close-btn">
                                 <a href="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="31" viewBox="0 0 24 24" fill="#2F3E5C"
-                                        width="24">
-                                        <path d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
-                                    </svg>
-                                </a>
-                            </div>
-                            <div class="track-info-arrow-btn">
-                                <a href="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 14" fill="#2F3E5C" width="30px"
-                                        height="18px">
-                                        <path
-                                            d="M8.12 14.71L12 10.83l3.88 3.88c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L12.7 8.71c-.39-.39-1.02-.39-1.41 0L6.7 13.3c-.39.39-.39 1.02 0 1.41.39.38 1.03.39 1.42 0z" />
-                                    </svg>
+                                    <span class="material-icons">close</span>
                                 </a>
                             </div>
                             <div class="track-info-play-btn">
                                 <a href="">
-                                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" fill="#2F3E5C"
-                                        viewBox="-100 -50 420.001 420.001" style="enable-background:new 0 0 320.001 320.001;"
-                                        xml:space="preserve">
-                                        <path d="M295.84,146.049l-256-144c-4.96-2.784-11.008-2.72-15.904,0.128C19.008,5.057,16,10.305,16,16.001v288
-                    c0,5.696,3.008,10.944,7.936,13.824c2.496,1.44,5.28,2.176,8.064,2.176c2.688,0,5.408-0.672,7.84-2.048l256-144
-                    c5.024-2.848,8.16-8.16,8.16-13.952S300.864,148.897,295.84,146.049z" />
-                                    </svg>
+                                    <span class="material-icons">play_circle_outline</span>
+                                </a>
+                            </div>
+                            <div class="track-info-edit-btn">
+                                <a href="">
+                                    <span class="material-icons">create</span>
+                                </a>
+                                </a>
+                            </div>
+                            <div class="track-info-delete-btn">
+                                <a href="">
+                                    <span class="material-icons">delete</span>
                                 </a>
                             </div>
                         </div>

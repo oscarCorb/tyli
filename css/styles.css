@@ -121,6 +121,10 @@ main {
     color: #38C48B;
 }
 
+.track-info-buttons .material-icons {
+    color: #2F3E5C;
+}
+
 /* ----- links ----- */
 
 a {
@@ -209,7 +213,6 @@ a:hover {
 
 .track-arrow-btn {
     /* padding: 2px 10px 0 0; */
-    
 }
 
 .track-play-btn {    
@@ -245,6 +248,8 @@ tr {
 
 .track-info-buttons {
     display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .track-info-buttons > div {
