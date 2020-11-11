@@ -194,7 +194,7 @@ a:hover {
 }
 
 /* ===== TRACK SECTION: track info when closed ===== */
-.track {
+.track-card {
     display: flex;
     color: #38C48B;
     padding: 4px 10px 4px 17px;
@@ -207,7 +207,7 @@ a:hover {
     overflow: visible;
 }
 
-.track-title {
+.track-card-title {
     flex-grow: 1;
 }
 
@@ -220,20 +220,18 @@ a:hover {
 }
 
 /* ===== TRACK SECTION: track info when open ===== */
-.track-open {
+.track-info-card {
     display: flex;
     margin-bottom: 15px;
     line-height: 25px;
-}
 
-.track-info {
-    flex-grow: 1;
-}
-
-.track-open {
     background-color: #38C48B;
     border-radius: 12px;
     padding: 5px 0px 5px 10px;
+}
+
+.track-info-text {
+    flex-grow: 1;
 }
 
 th {

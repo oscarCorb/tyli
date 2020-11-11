@@ -27,24 +27,21 @@
     <main>
         <!-- SECTION: ADD A NEW SONG -->
         <section id="add-song-section">
-            <div class="add-song-btn btn-close-x" onclick="toggleForm()">
+            <div class="add-song-btn btn-close-x">
                 <a href="#">
                     <img class="color-svg-blue" src="../assets/icons/add.svg" alt="add a new track button">
                 </a>
             </div>
-            <div class="add-song-text" onclick="toggleForm()">
+            <div class="add-song-text">
                 <a href="#">ADD YOUR MUSIC</a>
             </div>
         </section>
 
         <!-- SECTION: MY TRACKS LIST -->
-        <section id="my-tracks-section" class="myTracks">
+        <section id="my-tracks-section" class="myTracksSection">
             <!-- Track closed -->
             <!-- Track open -->
         </section>
-
-        <!-- botón provisional para borrar tracks -->
-        <button type="submit" class="deleteAll">Borrar todo (botón provisional)</button>
 
     </main>
 
@@ -54,32 +51,32 @@
         </div>
     </aside>
 
-    <!-- MODAL FORM: ADD A NEW SONG -->
+    <!-- MODAL FORM: ADD A NEW TRACK -->
     <div class="modal-container">
         <div class="modal-content">
 
             <!-- <div class="close-x">+</div> -->
-            <div class="form-title">New song details</div>
+            <div class="form-title">Track details</div>
 
-            <form class="form addSongForm">
+            <form class="form addNewTrackForm editTrackForm">
 
                 <!-- <label for="title">title</label> -->
-                <input type="text" name="title" id="title" placeholder="title" class="songTitle" required>
+                <input type="text" name="title" id="title" placeholder="title" class="trackTitle" required>
 
                 <!-- <label for="genre">genre</label> -->
-                <input type="text" name="genre" id="genre" placeholder="genre" class="songGenre">
+                <input type="text" name="genre" id="genre" placeholder="genre" class="trackGenre">
 
                 <p>which tools have you used</p>
                 <!-- <label for="software"></label> -->
-                <input type="text" name="software" id="software" placeholder="software" class="songSoftware">
+                <input type="text" name="software" id="software" placeholder="software" class="trackSoftware">
 
                 <!-- <label for="hardware"></label> -->
-                <input type="text" name="hardware" id="hardware" placeholder="hardware" class="songHardware">
+                <input type="text" name="hardware" id="hardware" placeholder="hardware" class="trackHardware">
 
                 <p>inspiration</p>
                 <!-- <label for="inspiration"></label> -->
                 <input type="text" name="inspiration" id="inspiration" placeholder="artists, songs, albums, etc"
-                    class="songInspiration">
+                    class="trackInspiration">
 
                 <p class="upload-file-text center">ADD AUDIO FILE</p>
 
@@ -135,7 +132,7 @@
         </ul>
     </nav>
 
-    <script src="../js/profile.js"></script>
+    <script type="module" src="../js/profile.js"></script>
 
 </body>
 
