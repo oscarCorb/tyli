@@ -3,14 +3,72 @@ import { Track }      from './Track.js';
 import { TrackList }  from './TrackList.js';
 import { TrackCache } from './TrackCache.js';
 
+
 // ===== GLOBAL VARIABLES ===== //
-// const trackList = new TrackList();
+const myTracksSection = document.querySelector('.myTracksSection');
+
+const addNewTrackBtn = document.querySelector('.add-song-btn');
+const modalContainer = document.querySelector('.modal-container');
+
+const trackForm = document.querySelector('.trackForm');
+
+let indexOfTrackToEdit;
+let trackToEdit;
+let toggleFormStatus = false; // toggle form: open or closed
+let toggleSubmitForm; // toggle submit button: add or edit
+
+/**  just for testing => **/ const trackTitleFocus = document.querySelector('.trackTitle');
+
+// constantes sin ningún uso:
+// const addNewTrackForm    = document.querySelector('.addNewTrackForm');
+// const editTrackForm      = document.querySelector('.editTrackForm');
+// const submitAddTrackBtn  = document.querySelector('.submitAddTrackBtn');
+// const submitEditTrackBtn = document.querySelector('.submitEditTrackBtn');
+
+// const trackInfoCard   = document.querySelector('.trackInfoCard');
+
+// const trackInfoEditBtn    = document.querySelector('.track-info-edit-btn');
+
+
 const trackCache = new TrackCache('tracks');
 const trackList  = new TrackList(trackCache);
 
-const myTracksSection = document.querySelector('.myTracksSection');
 
 // ===== FUNCTIONS ===== //
+
+// display form in a modal window
+const displayForm = () => {
+    modalContainer.style.visibility = 'visible';
+    addNewTrackBtn.style.transform = 'rotate(45deg)';
+    toggleFormStatus = true;
+    trackTitleFocus.focus(); /** just for testing **/
+}
+
+// close/hide form and modal window
+const hideForm = () => {
+    modalContainer.style.visibility = 'hidden';
+    addNewTrackBtn.style.transform = 'rotate(0deg)';
+    toggleFormStatus = false;
+    trackForm.reset();
+    printDB();
+}
+
+// choose normal card or info card to print it
+const makeTrackCard = (track, trackId) => {
+
+    const div = document.createElement('div');
+
+    if (trackId == track.id) {
+        div.innerHTML = makeTrackInfoCardHtml(track);
+        registerEventListeners(div);
+    } else {
+        div.innerHTML = makeTrackCardHtml(track);
+    }
+
+    myTracksSection.append(div);
+    
+    return div;
+}
 
 // print track cards (normal version)
 const makeTrackCardHtml = (track) => {
@@ -70,41 +128,25 @@ const makeTrackInfoCardHtml = (track) => {
                         <span class="material-icons">close</span>
                     </a>
                 </div>
-                <div class="track-info-play-btn">
-                    <a href="#">
-                        <span class="material-icons">play_circle_outline</span>
-                    </a>
-                </div>
+                
                 <div class="track-info-edit-btn">
                     <a href="#">
                         <span class="material-icons">edit</span>
                     </a>
                     </a>
                 </div>
+    
                 <div class="track-info-delete-btn">
                     <a href="#">
                         <span class="material-icons">delete</span>
                     </a>
                 </div>
             </div>
+            
         </div>           
     `;
 
     return html;
-}
-
-// choose normal card or info card to print it
-const makeTrackCard = (track, trackId) => {
-
-    const div = document.createElement('div');
-
-    div.innerHTML = trackId == track.id
-        ? makeTrackInfoCardHtml(track)
-        : makeTrackCardHtml(track);
-    
-    myTracksSection.append(div);
-
-    return div;
 }
 
 // print track cards
@@ -119,91 +161,44 @@ const printDB = (trackId) => {
 
 printDB();
 
-// const trackInfoEditBtn    = document.querySelector('.track-info-edit-btn');
+// info track buttons: event listeners
+const registerEventListeners = (div) => {
 
-// ===== GLOBAL VARIABLES ===== //
-const addNewTrackBtn     = document.querySelector('.add-song-btn'); // botón +
-const modalContainer     = document.querySelector('.modal-container');
+    const closeBtn  = div.querySelector('.track-info-close-btn');
+    const editBtn   = div.querySelector('.track-info-edit-btn');
+    const deleteBtn = div.querySelector('.track-info-delete-btn');
 
-const trackForm          = document.querySelector('.trackForm');
-const addNewTrackForm    = document.querySelector('.addNewTrackForm');
-const editTrackForm      = document.querySelector('.editTrackForm');
+    closeBtn.addEventListener('click', () => {
+        printDB();
+    });
 
-const submitAddTrackBtn  = document.querySelector('.submitAddTrackBtn');
-const submitEditTrackBtn = document.querySelector('.submitEditTrackBtn');
+    editBtn.addEventListener('click', (e) => {
+        trackInfoEditBtn(e.path[4].dataset.id);
+    });
 
+    deleteBtn.addEventListener('click', () => {
+        console.log('botón borrar');
+    });
 
-// ===== EVENTS ===== //
-//** auto-focus the first form input field **
-/**  just for testing **/ const trackTitleFocus = document.querySelector('.trackTitle');
+    // const divInfoButtons = document.createElement('div');
 
+    // trackInfoCard.appendChild(divInfoButtons);
 
-// click + button to open form
-addNewTrackBtn.addEventListener('click', () => {
+    // divInfoButtons.addEventListener('click', addButtons);
 
-    // aquí tendría que quitar la clase al botón ???
-
-
-    if (toggleFormStatus === false) {
-        displayForm();
-    } else {
-        hideForm();
-    }
-});
-
-let toggleFormStatus = false;
-
-// display form in a modal window
-const displayForm = () => {
-    modalContainer.style.visibility = 'visible';
-    addNewTrackBtn.style.transform = 'rotate(45deg)';
-    toggleFormStatus = true;
-    trackTitleFocus.focus(); /** just for testing **/
+    // addButtons = () => {
+    //     divInfoButtons.innerHTML = `
+            
+    //     `;
+    // }
 }
-
-// close/hide form and modal window
-const hideForm = () => {
-    modalContainer.style.visibility = 'hidden';
-    addNewTrackBtn.style.transform = 'rotate(0deg)';
-    toggleFormStatus = false;
-    trackForm.reset();
-    printDB();
-}
-
-const trackTitle       = document.querySelector('.trackTitle');
-const trackGenre       = document.querySelector('.trackGenre');
-const trackSoftware    = document.querySelector('.trackSoftware');
-const trackHardware    = document.querySelector('.trackHardware');
-const trackInspiration = document.querySelector('.trackInspiration');
-
-// click save button (ADD track form)
-submitAddTrackBtn.addEventListener('click', (e) => {
-    
-    e.preventDefault();
-    
-    const newTrackForm = new Track(trackTitle.value, trackGenre.value, trackSoftware.value, trackHardware.value, trackInspiration.value);
-    
-    trackList.addTrack(newTrackForm);
-    
-    hideForm();
-});
-
-// edit form fields
-const editFormTitle       = document.forms[0][0];
-const editFormGenre       = document.forms[0][1];
-const editFormSofware     = document.forms[0][2];
-const editFormHardware    = document.forms[0][3];
-const editFormInspiration = document.forms[0][4];
-
-let indexOfTrackToEdit;
-let trackToEdit;
 
 // edit track
 const trackInfoEditBtn = (trackId) => {
 
     displayForm();
 
-    // search in DB which track match with argument
+    // search in DB which track matches argument
     trackList.tracks.find((track, index) => {
         if (track.id == trackId) {
             trackToEdit = track;
@@ -217,7 +212,14 @@ const trackInfoEditBtn = (trackId) => {
 // auto-filled out form when click on edit track button
 const filledOutEditForm = () => {
 
-    const trackEntries = Object.entries(trackToEdit); // console.log(trackToEdit);
+    const trackEntries = Object.entries(trackToEdit); //console.log(trackToEdit);
+
+    // edit form fields
+    const editFormTitle       = document.forms[0][0];
+    const editFormGenre       = document.forms[0][1];
+    const editFormSofware     = document.forms[0][2];
+    const editFormHardware    = document.forms[0][3];
+    const editFormInspiration = document.forms[0][4];
 
     for (const track of trackEntries) {
 
@@ -241,19 +243,57 @@ const filledOutEditForm = () => {
     }
 }
 
-// click save button (EDIT track form)
-submitEditTrackBtn.addEventListener('click', (e) => {
-    
-    e.preventDefault();
 
-    const editedTrack = new Track(editFormTitle.value, editFormGenre.value, editFormSofware.value, editFormHardware.value, editFormInspiration.value);
+// ===== EVENTS ===== //
 
-    trackList.editTrack(editedTrack, indexOfTrackToEdit);
-    
-    hideForm();
+// click + button to add new tracks
+addNewTrackBtn.addEventListener('click', () => {
+
+    toggleSubmitForm = 'add';
+
+    if (toggleFormStatus === false) {
+        displayForm();
+    } else {
+        hideForm();
+    }
 });
 
-const trackInfoCard = document.querySelector('.trackInfoCard');
+// voy a intentar hacer un evento con los 2 botones submits en un if
+trackForm.addEventListener('submit', (e) => {
+    
+    e.preventDefault(); // ***
+    
+    const trackTitle       = document.querySelector('.trackTitle');
+    const trackGenre       = document.querySelector('.trackGenre');
+    const trackSoftware    = document.querySelector('.trackSoftware');
+    const trackHardware    = document.querySelector('.trackHardware');
+    const trackInspiration = document.querySelector('.trackInspiration');
+
+    if (toggleSubmitForm === 'add') {
+
+        const newTrackForm = new Track(trackTitle.value, trackGenre.value, trackSoftware.value, trackHardware.value, trackInspiration.value);
+    
+        trackList.addTrack(newTrackForm);
+    }
+
+    // // edit form fields
+    // const editFormTitle       = document.forms[0][0];
+    // const editFormGenre       = document.forms[0][1];
+    // const editFormSofware     = document.forms[0][2];
+    // const editFormHardware    = document.forms[0][3];
+    // const editFormInspiration = document.forms[0][4];
+    
+
+    // // esto funcionará cuando esté creado el evento del botón edit y su lógica
+    // if (toggleSubmitForm === 'edit') {
+
+    //     const editedTrack = new Track(editFormTitle.value, editFormGenre.value, editFormSofware.value, editFormHardware.value, editFormInspiration.value);
+
+    //     trackList.editTrack(editedTrack, indexOfTrackToEdit);
+    // }
+
+    hideForm();
+})
 
 // dropdown: click arow to display track info
 myTracksSection.addEventListener('click', (e) => {
@@ -263,32 +303,6 @@ myTracksSection.addEventListener('click', (e) => {
         printDB(e.path[3].dataset.id);
     }
 });
-
-// *** CREANDO ESTO: me da problemas quizá porque los botones aún no están renderizados
-// trackInfoCard.addEventListener('click', (e) => {
-    
-//     console.log(e);
-// });
-
-// dropdown track when click on arrow icon to see track info
-// myTracksSection.addEventListener('click', (e) => { 
-//     if (e.target.innerText === 'close') {
-//         printDB();
-//     }
-
-//     if (e.target.innerText === 'edit') {        
-//         trackInfoEditBtn(e.path[4].dataset.id);
-//     }
-
-//     // const idDeleteBtnPath = e.path[5].childNodes[1].dataset.id;
-//     if (e.target.innerText === 'delete') {
-//         // prompt o similar con sí o no: ¿Are you sure? I will be deleted permanently.
-//             // => No. FIN
-//             // => Sí:
-//             // Borrar canción del local storage según su ID
-//             // Print
-//     }
-// });
 
 // console.log(e.target.innerText);
 // console.log(e);
