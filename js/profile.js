@@ -252,7 +252,7 @@ addNewTrackBtn.addEventListener('click', () => {
     }
 });
 
-// voy a intentar hacer un evento con los 2 botones submits en un if
+// form submit button (add/edit track)
 trackForm.addEventListener('submit', (e) => {
     
     e.preventDefault();
@@ -278,7 +278,7 @@ trackForm.addEventListener('submit', (e) => {
     }
 
     hideForm();
-})
+});
 
 // dropdown: click arow to display track info
 myTracksSection.addEventListener('click', (e) => {
@@ -294,4 +294,5 @@ myTracksSection.addEventListener('click', (e) => {
 // ideal improves:
 // ESC key should also close forms
 // modal form title when edit: 'New track deatils' to 'Edit track details'
-// style.tranform should working with a CSS class
+// style.tranform should be changed by CSS class (classList, add, remove) instead of JS code
+// sort out card overflowing text
