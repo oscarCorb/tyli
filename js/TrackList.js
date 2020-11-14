@@ -16,9 +16,15 @@ export class TrackList {
     }
     
     editTrack(index, track) {
-        // Cuando se edita algo SIEMPRE indicar 1º qué y luego el contenido
-		this.tracks = [...this.tracks.splice(index, 1, track)];
+        // Consejo Fran: Cuando se edita algo SIEMPRE indicar qué se borra y luego el contenido
+        [...this.tracks.splice(index, 1, track)];
 		this.cache.saveLocalStorage(this.tracks);
 		return this.tracks;
-	}
+    }
+    
+    deleteTrack(index) {
+        [...this.tracks.splice(index, 1)];
+        this.cache.saveLocalStorage(this.tracks);
+		return this.tracks;
+    }
 }

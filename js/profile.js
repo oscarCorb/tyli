@@ -6,29 +6,23 @@ import { TrackCache } from './TrackCache.js';
 
 // ===== GLOBAL VARIABLES ===== //
 const myTracksSection = document.querySelector('.myTracksSection');
-
 const addNewTrackBtn = document.querySelector('.add-song-btn');
 const modalContainer = document.querySelector('.modal-container');
-
 const trackForm = document.querySelector('.trackForm');
 
-let indexOfTrackToEdit;
-let trackToEdit;
+// edit form fields
+const editFormTitle       = document.forms[0][0];
+const editFormGenre       = document.forms[0][1];
+const editFormSofware     = document.forms[0][2];
+const editFormHardware    = document.forms[0][3];
+const editFormInspiration = document.forms[0][4];
+
 let toggleFormStatus = false; // toggle form: open or closed
 let toggleSubmitForm; // toggle submit button: add or edit
+let indexOfTrackToEdit;
+let trackToEdit;
 
 /**  just for testing => **/ const trackTitleFocus = document.querySelector('.trackTitle');
-
-// constantes sin ningún uso:
-// const addNewTrackForm    = document.querySelector('.addNewTrackForm');
-// const editTrackForm      = document.querySelector('.editTrackForm');
-// const submitAddTrackBtn  = document.querySelector('.submitAddTrackBtn');
-// const submitEditTrackBtn = document.querySelector('.submitEditTrackBtn');
-
-// const trackInfoCard   = document.querySelector('.trackInfoCard');
-
-// const trackInfoEditBtn    = document.querySelector('.track-info-edit-btn');
-
 
 const trackCache = new TrackCache('tracks');
 const trackList  = new TrackList(trackCache);
@@ -94,7 +88,7 @@ const makeTrackCardHtml = (track) => {
 // print track info card (open version with track info)
 const makeTrackInfoCardHtml = (track) => {
     const html = `
-        <div class="track-info-card trackInfoCard" data-id="${track.id}">
+        <div class="track-info-card" data-id="${track.id}">
             <!-- TABLE -->
             <div class="track-info-text">
                 <table>
@@ -173,24 +167,15 @@ const registerEventListeners = (div) => {
     });
 
     editBtn.addEventListener('click', (e) => {
-        trackInfoEditBtn(e.path[4].dataset.id);
+        toggleSubmitForm = 'edit';
+        let trackId = e.path[4].dataset.id;
+        trackInfoEditBtn(trackId);
     });
 
-    deleteBtn.addEventListener('click', () => {
-        console.log('botón borrar');
+    deleteBtn.addEventListener('click', (e) => { //***
+        let trackId = e.path[4].dataset.id;
+        trackInfoDeleteBtn(trackId);
     });
-
-    // const divInfoButtons = document.createElement('div');
-
-    // trackInfoCard.appendChild(divInfoButtons);
-
-    // divInfoButtons.addEventListener('click', addButtons);
-
-    // addButtons = () => {
-    //     divInfoButtons.innerHTML = `
-            
-    //     `;
-    // }
 }
 
 // edit track
@@ -212,14 +197,7 @@ const trackInfoEditBtn = (trackId) => {
 // auto-filled out form when click on edit track button
 const filledOutEditForm = () => {
 
-    const trackEntries = Object.entries(trackToEdit); //console.log(trackToEdit);
-
-    // edit form fields
-    const editFormTitle       = document.forms[0][0];
-    const editFormGenre       = document.forms[0][1];
-    const editFormSofware     = document.forms[0][2];
-    const editFormHardware    = document.forms[0][3];
-    const editFormInspiration = document.forms[0][4];
+    const trackEntries = Object.entries(trackToEdit);
 
     for (const track of trackEntries) {
 
@@ -243,6 +221,22 @@ const filledOutEditForm = () => {
     }
 }
 
+// delete track
+const trackInfoDeleteBtn = (trackId) => { //***
+
+    let indexOfTrackToDelete;
+
+    trackList.tracks.find((track, index) => {
+        if (track.id == trackId) {
+            indexOfTrackToDelete = index;
+        }
+    });
+    
+    trackList.deleteTrack(indexOfTrackToDelete);
+
+    printDB();
+}
+
 
 // ===== EVENTS ===== //
 
@@ -261,7 +255,7 @@ addNewTrackBtn.addEventListener('click', () => {
 // voy a intentar hacer un evento con los 2 botones submits en un if
 trackForm.addEventListener('submit', (e) => {
     
-    e.preventDefault(); // ***
+    e.preventDefault();
     
     const trackTitle       = document.querySelector('.trackTitle');
     const trackGenre       = document.querySelector('.trackGenre');
@@ -271,26 +265,17 @@ trackForm.addEventListener('submit', (e) => {
 
     if (toggleSubmitForm === 'add') {
 
-        const newTrackForm = new Track(trackTitle.value, trackGenre.value, trackSoftware.value, trackHardware.value, trackInspiration.value);
+        const addOneTrack = new Track(trackTitle.value, trackGenre.value, trackSoftware.value, trackHardware.value, trackInspiration.value);
     
-        trackList.addTrack(newTrackForm);
+        trackList.addTrack(addOneTrack);
     }
 
-    // // edit form fields
-    // const editFormTitle       = document.forms[0][0];
-    // const editFormGenre       = document.forms[0][1];
-    // const editFormSofware     = document.forms[0][2];
-    // const editFormHardware    = document.forms[0][3];
-    // const editFormInspiration = document.forms[0][4];
-    
+    if (toggleSubmitForm === 'edit') {
 
-    // // esto funcionará cuando esté creado el evento del botón edit y su lógica
-    // if (toggleSubmitForm === 'edit') {
+        const editOneTrack = new Track(editFormTitle.value, editFormGenre.value, editFormSofware.value, editFormHardware.value, editFormInspiration.value);
 
-    //     const editedTrack = new Track(editFormTitle.value, editFormGenre.value, editFormSofware.value, editFormHardware.value, editFormInspiration.value);
-
-    //     trackList.editTrack(editedTrack, indexOfTrackToEdit);
-    // }
+        trackList.editTrack(indexOfTrackToEdit, editOneTrack);
+    }
 
     hideForm();
 })
@@ -305,8 +290,8 @@ myTracksSection.addEventListener('click', (e) => {
 });
 
 // console.log(e.target.innerText);
-// console.log(e);
 
 // ideal improves:
 // ESC key should also close forms
 // modal form title when edit: 'New track deatils' to 'Edit track details'
+// style.tranform should working with a CSS class
