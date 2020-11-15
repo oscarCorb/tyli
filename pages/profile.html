@@ -7,8 +7,22 @@
   <link rel="stylesheet" href="../css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap"
         rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <title>Profile | TYLI</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- FIREBASE -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+    
+    <!-- Siguiente línea añadida según tuto de Net Ninja, no se si se prescindir de ella -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+    
+    <title>Profile | TYLI</title>
+    
 </head>
 
 <body>
@@ -121,7 +135,28 @@
   </ul>
 </nav>
 
-<script type="module" src="../js/profile.js"></script>
+    <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyC0lhkPIeWJRcswklZGiy8Bln9xEgpcTQA",
+        authDomain: "tyli-music.firebaseapp.com",
+        databaseURL: "https://tyli-music.firebaseio.com",
+        projectId: "tyli-music",
+        storageBucket: "tyli-music.appspot.com",
+        messagingSenderId: "151998115416",
+        appId: "1:151998115416:web:a679b0e467457abf6ca42d",
+        measurementId: "G-0EJ4ECP5LM"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    const db = firebase.firestore();
+    db.settings({ timestampsInSnapshots: true });
+    </script>
+
+    <script type="module" src="../js/profile.js"></script>
+    <script type="module" src="../js/app.js"></script>
 
 </body>
 
