@@ -2,137 +2,126 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap"
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap"
         rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Profile | TYLI</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>Profile | TYLI</title>
 </head>
 
 <body>
-    <header id="header" class="header-section">
-        <div id="logo">
-            <a class="logo" href="">
-                <img src="../assets/img/logo.png" alt="logo tyli">
-            </a>
-        </div>
-        <div class="profile-details">
-            <p class="personal-details">John Doe</p>
-            <p class="edit-button"><a href="#">Edit</a></p>
-        </div>
-    </header>
+<header id="header" class="header-section">
+  <div id="logo">
+    <a class="logo" href="">
+      <img src="../assets/img/logo.png" alt="logo tyli">
+    </a>
+  </div>
+  <div class="profile-details">
+    <p class="personal-details">John Doe</p>
+    <p class="edit-button"><a href="#">Edit</a></p>
+  </div>
+</header>
 
-    <main>
-        <!-- SECTION: ADD A NEW SONG -->
-        <section id="add-song-section">
-            <div class="add-song-btn btn-close-x">
-                <a href="#">
-                    <img class="color-svg-blue" src="../assets/icons/add.svg" alt="add a new track button">
-                </a>
-            </div>
-            <div class="add-song-text">
-                <a href="#">ADD YOUR MUSIC</a>
-            </div>
-        </section>
-
-        <!-- SECTION: MY TRACKS LIST -->
-        <section id="my-tracks-section" class="myTracksSection">
-            <!-- Track closed -->
-            <!-- Track open -->
-        </section>
-
-    </main>
-
-    <aside id="waveform-section">
-        <div class="waveform">
-            <!-- <img src="../assets/icons/onda.svg" alt="track waveform"> -->
-        </div>
-    </aside>
-
-    <!-- MODAL FORM: ADD A NEW TRACK -->
-    <div class="modal-container">
-        <div class="modal-content">
-
-            <!-- <div class="close-x">+</div> -->
-            <div class="form-title">Track details</div>
-
-            <form class="trackForm">
-
-                <!-- <label for="title">title</label> -->
-                <input type="text" name="title" id="title" placeholder="title" class="trackTitle" required>
-
-                <!-- <label for="genre">genre</label> -->
-                <input type="text" name="genre" id="genre" placeholder="genre" class="trackGenre">
-
-                <p>which tools have you used</p>
-                <!-- <label for="software"></label> -->
-                <input type="text" name="software" id="software" placeholder="software" class="trackSoftware">
-
-                <!-- <label for="hardware"></label> -->
-                <input type="text" name="hardware" id="hardware" placeholder="hardware" class="trackHardware">
-
-                <p>inspiration</p>
-                <!-- <label for="inspiration"></label> -->
-                <input type="text" name="inspiration" id="inspiration" placeholder="artists, songs, albums, etc"
-                    class="trackInspiration">
-
-                <p class="upload-file-text center">ADD AUDIO FILE</p>
-
-                <svg class="btn-round btn-round-white upload-file-btn" version="1.1" id="Capa_1"
-                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                    fill="#FFFFFF" viewBox="-200 -200 912.171 912.171"
-                    style="enable-background:new 0 0 512.171 512.171;" xml:space="preserve">
-                    <g>
-                        <g>
-                            <path d="M476.723,216.64L263.305,3.115C261.299,1.109,258.59,0,255.753,0c-2.837,0-5.547,1.131-7.552,3.136L35.422,216.64
-			c-3.051,3.051-3.947,7.637-2.304,11.627c1.664,3.989,5.547,6.571,9.856,6.571h117.333v266.667c0,5.888,4.779,10.667,10.667,10.667
-			h170.667c5.888,0,10.667-4.779,10.667-10.667V234.837h116.885c4.309,0,8.192-2.603,9.856-6.592
-			C480.713,224.256,479.774,219.691,476.723,216.64z" />
-                        </g>
-                    </g>
-                </svg>
-
-                <input type="submit" name="submit" value="SAVE" class="btn-long btn-add-song-save">
-
-            </form>
-
-        </div>
+<main>
+  <!-- SECTION: ADD A NEW SONG -->
+  <section id="add-song-section">
+    <div class="add-song-btn btn-close-x">
+      <a href="#">
+        <img class="color-svg-blue" src="../assets/icons/add.svg" alt="add a new track button">
+      </a>
     </div>
+    <div class="add-song-text">
+      <a href="#">ADD YOUR MUSIC</a>
+    </div>
+  </section>
 
-    <!-- NAVIGATION MENU -->
-    <nav id="nav-bar">
-        <ul class="nav-bar">
-            <li id="home">
-                <a href="">
-                    <img class="color-svg-white" src="../assets/icons/home.svg" alt="home">
-                </a>
-            </li>
-            <li id="profile">
-                <a href="">
-                    <img class="color-svg-blue" src="../assets/icons/user.svg" alt="">
-                </a>
-            </li>
-            <li id="search">
-                <a href="">
-                    <img class="color-svg-white" src="../assets/icons/loupe.svg" alt="">
-                </a>
-            </li>
-            <li id="liked-tracks">
-                <a href="">
-                    <img class="color-svg-white" src="../assets/icons/heart.svg" alt="">
-                </a>
-            </li>
-            <li id="menu">
-                <a href="">
-                    <img class="color-svg-white" src="../assets/icons/menu.svg" alt="">
-                </a>
-            </li>
-        </ul>
-    </nav>
+  <!-- SECTION: MY TRACKS LIST -->
+  <!-- Lo más común es poner un id en camel-case a los elementos a los que vas a acceder en JS. El uso de ids está visto como una  -->
+  <!-- mala práctica para css. Para estilos css y tal, si se usan clases y kebab-case (con guiones) -->
+  <section id="myTracksSection" class="my-tracks-section">
+    <!-- Track closed -->
+    <!-- Track open -->
+  </section>
 
-    <script type="module" src="../js/profile.js"></script>
+</main>
+
+<aside id="waveform-section">
+  <div class="waveform">
+    <!-- <img src="../assets/icons/onda.svg" alt="track waveform"> -->
+  </div>
+</aside>
+
+<!-- MODAL FORM: ADD A NEW TRACK -->
+<div class="modal-container is-hidden">
+  <div class="modal-content">
+
+    <!-- <div class="close-x">+</div> -->
+    <div class="form-title">Track details</div>
+
+    <form class="trackForm">
+
+      <!-- <label for="title">title</label> -->
+      <input type="text" name="title" id="title" placeholder="title" class="trackTitle" required>
+
+      <!-- <label for="genre">genre</label> -->
+      <input type="text" name="genre" id="genre" placeholder="genre" class="trackGenre">
+
+      <p>which tools have you used</p>
+      <!-- <label for="software"></label> -->
+      <input type="text" name="software" id="software" placeholder="software" class="trackSoftware">
+
+      <!-- <label for="hardware"></label> -->
+      <input type="text" name="hardware" id="hardware" placeholder="hardware" class="trackHardware">
+
+      <p>inspiration</p>
+      <!-- <label for="inspiration"></label> -->
+      <input type="text" name="inspiration" id="inspiration" placeholder="artists, songs, albums, etc"
+             class="trackInspiration">
+
+      <p class="upload-file-text center">ADD AUDIO FILE</p>
+
+      <i class="btn-round btn-round-white upload-file-btn"></i>
+
+      <input type="submit" name="submit" value="SAVE" class="btn-long btn-add-song-save">
+    </form>
+
+  </div>
+</div>
+
+<!-- NAVIGATION MENU -->
+<nav id="nav-bar">
+  <ul class="nav-bar">
+    <li id="home">
+      <a href="">
+        <img class="color-svg-white" src="../assets/icons/home.svg" alt="home">
+      </a>
+    </li>
+    <li id="profile">
+      <a href="">
+        <img class="color-svg-blue" src="../assets/icons/user.svg" alt="">
+      </a>
+    </li>
+    <li id="search">
+      <a href="">
+        <img class="color-svg-white" src="../assets/icons/loupe.svg" alt="">
+      </a>
+    </li>
+    <li id="liked-tracks">
+      <a href="">
+        <img class="color-svg-white" src="../assets/icons/heart.svg" alt="">
+      </a>
+    </li>
+    <li id="menu">
+      <a href="">
+        <img class="color-svg-white" src="../assets/icons/menu.svg" alt="">
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<script type="module" src="../js/profile.js"></script>
 
 </body>
 
