@@ -1,4 +1,3 @@
-import {TrackCache} from "./TrackCache.js";
 
 export class TrackList {
 
@@ -7,6 +6,7 @@ export class TrackList {
     this.tracks = cache.getLocalStorage();
   }
 
+  // add track to local storage
   addTrack(track) {
     this.tracks = [track, ...this.tracks];
     this.cache.saveLocalStorage(this.tracks);

@@ -1,4 +1,20 @@
-// te muevo aquí el código relacionado con crear elementos html para dejarte más limpio profile.js
+// print track cards (normal version)
+export const makeTrackCardHtml = (track) => {
+  return `
+    <div class="track-card trackCard" data-id="${track.id}">
+      <p class="track-card-title">${track.title}</p>
+      <div class="track-dropdown-btn">
+        <a href="#">
+          <span class="material-icons">keyboard_arrow_down</span>
+        </a>
+      </div>
+      <div class="track-play-btn">
+        <a href="#">
+          <span class="material-icons track-play-btn">play_arrow</span>
+        </a>
+      </div>
+    </div>`;
+}
 
 // print track info card (open version with track info)
 export const makeTrackInfoCardHtml = (track) => {
@@ -48,24 +64,6 @@ export const makeTrackInfoCardHtml = (track) => {
             <span class="material-icons">delete</span>
           </a>
         </div>
-      </div>
-    </div>`;
-}
-
-// print track cards (normal version)
-export const makeTrackCardHtml = (track) => {
-  return `
-    <div class="track-card trackCard" data-id="${track.id}">
-      <p class="track-card-title">${track.title}</p>
-      <div class="track-dropdown-btn">
-        <a href="#">
-          <span class="material-icons">keyboard_arrow_down</span>
-        </a>
-      </div>
-      <div class="track-play-btn">
-        <a href="#">
-          <span class="material-icons track-play-btn">play_arrow</span>
-        </a>
       </div>
     </div>`;
 }
