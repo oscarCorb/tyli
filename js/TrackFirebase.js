@@ -20,7 +20,7 @@ export class TrackFirebase {
         
         let id = (track.id).toString();
 
-        db.collection('tracks').doc(id).set({
+        return db.collection('tracks').doc(id).set({
             title:       track.title,
             genre:       track.genre,
             software:    track.software,
@@ -33,13 +33,13 @@ export class TrackFirebase {
 
     // delete track from Firebase
     deleteTrack(trackId) {
-        db.collection('tracks').doc(trackId).delete();
+        return db.collection('tracks').doc(trackId).delete();
     }
 
     // update track in Firebase
     editTrack(id, trackValues) {
 
-        db.collection('tracks').doc(id).update({
+        return db.collection('tracks').doc(id).update({
             title:       trackValues.title,
             genre:       trackValues.genre,
             software:    trackValues.software,

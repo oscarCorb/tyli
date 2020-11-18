@@ -47,12 +47,14 @@ const hideForm = () => {
   trackForm.reset();
 }
 
-// 
+// *** ESTO LO HE COPIADO Y NO LO ENTIENDO DEL TODO BIEN ***
 const onGetTrack = (callback) => db.collection('tracks').onSnapshot(callback);
 
 // print track cards
-export const printDB = (trackId) => {
+const printDB = (trackId) => {
   
+  // *** ESTO TAMBIÉN. El caso es que sin esta línea no se imprimen
+  // *** los nuevos tracks en pantalla, hay que recargar el navegador
   onGetTrack((querySnapshot => {
   
     myTracksSection.innerHTML = '';
@@ -117,8 +119,16 @@ const trackInfoEditBtn = async () => {
   
   displayForm();
 
+  // código de Fran, tengo que adaptarlo
+  // const tracks = await trackFirebase.getTracks();
+  // const trackIndex = tracks.findIndex(track => track.id === parseInt(idTrackToEdit, 10));
+  // trackToEdit = tracks[trackIndex];
+  // indexOfTrackToEdit = trackIndex;
+  // filledOutEditForm();
+  
   // search in DB which track matches argument
-  await trackFirebase.getTracks().then((tracks) => {
+  await trackFirebase.getTracks()
+  .then((tracks) => {
     tracks.find(track => {
       if (track.id === parseInt(idTrackToEdit, 10)) {
         trackToEdit = track;
@@ -167,17 +177,21 @@ addNewTrackBtn.addEventListener('click', () => {
 });
 
 // form submit button (add/edit track)
-trackForm.addEventListener('submit', (e) => {
+trackForm.addEventListener('submit', async(e) => {
   e.preventDefault();
   
   if (toggleSubmitForm === 'add') {
+
     const addOneTrack = new Track(trackTitle.value, trackGenre.value, trackSoftware.value, trackHardware.value, trackInspiration.value);
-    trackFirebase.addTrack(addOneTrack);
+    
+    await trackFirebase.addTrack(addOneTrack);
   }
 
   if (toggleSubmitForm === 'edit') {
+
     const editOneTrack = new Track(trackTitle.value, trackGenre.value, trackSoftware.value, trackHardware.value, trackInspiration.value);
-    trackFirebase.editTrack(idTrackToEdit, editOneTrack);
+    
+    await trackFirebase.editTrack(idTrackToEdit, editOneTrack);
   }
 
   hideForm();
@@ -194,5 +208,5 @@ myTracksSection.addEventListener('click', (e) => {
 
 // ideal improves:
 // ESC key should also close forms
-// modal form title when edit: 'New track details' to 'Edit track details'
+// modal form should be 'New track details' or 'Edit track details'
 // sort out card overflowing text
