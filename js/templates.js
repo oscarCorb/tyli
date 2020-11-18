@@ -5,7 +5,7 @@ export const makeTrackCardHtml = (track) => {
       <p class="track-card-title">${track.title}</p>
       <div class="track-dropdown-btn">
         <a href="#">
-          <span class="material-icons">keyboard_arrow_down</span>
+          <span class="material-icons track-open-btn">keyboard_arrow_down</span>
         </a>
       </div>
       <div class="track-play-btn">

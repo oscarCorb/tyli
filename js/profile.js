@@ -48,21 +48,21 @@ const hideForm = () => {
 }
 
 // *** ESTO LO HE COPIADO Y NO LO ENTIENDO DEL TODO BIEN ***
+//
+/* Lo de snapshot es un manejador de eventos para cuando se producen cambios
+ * en el documento en firebase (en su servidor) la razón de que se pinten 2 veces las cosas
+ * es que este manejador salta más de una vez cuando se produce una edición (no sé muy bien por qué)
+ **/
 const onGetTrack = (callback) => db.collection('tracks').onSnapshot(callback);
 
 // print track cards
-const printDB = (trackId) => {
-  
+
   // *** ESTO TAMBIÉN. El caso es que sin esta línea no se imprimen
   // *** los nuevos tracks en pantalla, hay que recargar el navegador
-  onGetTrack((querySnapshot => {
-  
-    myTracksSection.innerHTML = '';
-    
-    trackFirebase.getTracks().then((tracks) => {
-      tracks.forEach(track => makeTrackCard(track, trackId));
-    });
-  }));
+const printDB = async (trackId) => {
+  const myTracks = await trackFirebase.getTracks()
+  myTracksSection.innerHTML = '';
+  myTracks.forEach(track => makeTrackCard(track, trackId));
 }
 
 printDB();
@@ -73,7 +73,7 @@ const makeTrackCard = (track, trackId) => {
   const div = document.createElement('div');
   const wrapper = document.createElement('div');
 
-  if (parseInt(trackId, 10) === parseInt(track.id, 10)) {
+  if (parseInt(trackId, 10) === track.id) {
     wrapper.innerHTML = makeTrackInfoCardHtml(track);
     // cambiando el innerHTML a pelo podemos perder referencias que hubiera guardadas.
     // Mucho más recomendable que añadas el elemento así para mantener cualquier referencia que tuvieses
@@ -95,28 +95,26 @@ const registerEventListeners = (div) => {
   const editBtn   = div.querySelector('.track-info-edit-btn');
   const deleteBtn = div.querySelector('.track-info-delete-btn');
 
-  closeBtn.addEventListener('click', () => {
-    printDB();
+  closeBtn.addEventListener('click', async () => {
+    await printDB();
   });
 
-  editBtn.addEventListener('click', (e) => {
+  editBtn.addEventListener('click', async (e) => {
     toggleSubmitForm = 'edit';
     idTrackToEdit = e.currentTarget.dataset.id;
-    trackInfoEditBtn(idTrackToEdit);
+    await trackInfoEditBtn(idTrackToEdit);
+    await printDB(idTrackToEdit);
   });
 
-  deleteBtn.addEventListener('click', (e) => {
+  deleteBtn.addEventListener('click', async (e) => {
     const trackIdToDelete = e.currentTarget.dataset.id;
-    trackFirebase.deleteTrack(trackIdToDelete);
-    // printDB();
+    await trackFirebase.deleteTrack(trackIdToDelete);
+    await printDB();
   });
 }
 
 // edit track
 const trackInfoEditBtn = async () => {
-  
-  let trackToEdit;
-  
   displayForm();
 
   // código de Fran, tengo que adaptarlo
@@ -125,22 +123,18 @@ const trackInfoEditBtn = async () => {
   // trackToEdit = tracks[trackIndex];
   // indexOfTrackToEdit = trackIndex;
   // filledOutEditForm();
-  
+
   // search in DB which track matches argument
-  await trackFirebase.getTracks()
-  .then((tracks) => {
-    tracks.find(track => {
-      if (track.id === parseInt(idTrackToEdit, 10)) {
-        trackToEdit = track;
-      }
-    });
-  })
-  .then(() => filledOutEditForm(trackToEdit));
+  const tracks = await trackFirebase.getTracks()
+  const trackToEdit = tracks.find(track => track.id === parseInt(idTrackToEdit, 10))
+  filledOutEditForm(trackToEdit)
+  return trackToEdit;
 }
 
 // auto-filled out form when click on edit track button
 const filledOutEditForm = (trackToEdit) => {
   const trackEntries = Object.entries(trackToEdit);
+  console.log(trackEntries)
   for (const track of trackEntries) {
     switch (track[0]) {
       case 'title':
@@ -166,7 +160,7 @@ const filledOutEditForm = (trackToEdit) => {
 
 // click + button to add new tracks
 addNewTrackBtn.addEventListener('click', () => {
-  
+
   toggleSubmitForm = 'add';
 
   if (!toggleFormStatus) {
@@ -177,30 +171,28 @@ addNewTrackBtn.addEventListener('click', () => {
 });
 
 // form submit button (add/edit track)
-trackForm.addEventListener('submit', async(e) => {
+trackForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  
+
   if (toggleSubmitForm === 'add') {
 
     const addOneTrack = new Track(trackTitle.value, trackGenre.value, trackSoftware.value, trackHardware.value, trackInspiration.value);
-    
-    await trackFirebase.addTrack(addOneTrack);
+    const track = await trackFirebase.addTrack(addOneTrack);
+    await printDB(addOneTrack.id)
   }
 
   if (toggleSubmitForm === 'edit') {
-
     const editOneTrack = new Track(trackTitle.value, trackGenre.value, trackSoftware.value, trackHardware.value, trackInspiration.value);
-    
     await trackFirebase.editTrack(idTrackToEdit, editOneTrack);
+    await printDB(idTrackToEdit);
   }
-
   hideForm();
 });
 
-// dropdown: click arow to display track info
-myTracksSection.addEventListener('click', (e) => {
-  if (e.target.innerText === 'keyboard_arrow_down') {
-    printDB(e.path[3].dataset.id);
+// dropdown: click arrow to display track info
+myTracksSection.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('track-open-btn')) {
+    await printDB(e.path[3].dataset.id);
   }
 });
 
