@@ -26,137 +26,147 @@
 </head>
 
 <body>
-<header id="header" class="header-section">
-  <div id="logo">
-    <a class="logo" href="">
-      <img src="../assets/img/logo.png" alt="logo tyli">
-    </a>
-  </div>
-  <div class="profile-details">
-    <p class="personal-details">John Doe</p>
-    <p class="edit-button"><a href="#">Edit</a></p>
-  </div>
-</header>
-
-<main>
-  <!-- SECTION: ADD A NEW SONG -->
-  <section id="add-song-section">
-    <div class="add-song-btn btn-close-x">
-      <a href="#">
-        <img class="color-svg-blue" src="../assets/icons/add.svg" alt="add a new track button">
+  
+  <header id="header" class="header-section">
+    <div id="logo">
+      <a class="logo" href="">
+        <img src="../assets/img/logo.png" alt="logo tyli">
       </a>
     </div>
-    <div class="add-song-text">
-      <a href="#">ADD YOUR MUSIC</a>
+    <div class="profile-details">
+      <p class="personal-details">John Doe</p>
+      <p class="edit-button"><a href="#">Edit</a></p>
+    </div>
+  </header>
+
+  <!-- SEARCH SECTION -->
+  <section id="search-bar" class="is-hidden">
+    <div class="search-bar">
+      <form action="" class="search-form">
+        <input type="search" class="search-bar-input" placeholder="Tracks filter">
+      </form>
     </div>
   </section>
 
-  <!-- SECTION: MY TRACKS LIST -->
-  <!-- Lo más común es poner un id en camel-case a los elementos a los que vas a acceder en JS. El uso de ids está visto como una  -->
-  <!-- mala práctica para css. Para estilos css y tal, si se usan clases y kebab-case (con guiones) -->
-  <section id="myTracksSection" class="my-tracks-section">
-    <!-- Track closed -->
-    <!-- Track open -->
-  </section>
+  <main>
 
-</main>
+    <!-- SECTION: ADD A NEW SONG -->
+    <section id="add-song-section">
+      <div class="add-song-btn btn-close-x">
+        <a href="#">
+          <img class="color-svg-blue" src="../assets/icons/add.svg" alt="add a new track button">
+        </a>
+      </div>
+      <div class="add-song-text">
+        <a href="#">ADD YOUR MUSIC</a>
+      </div>
+    </section>
 
-<aside id="waveform-section">
-  <div class="waveform">
-    <!-- <img src="../assets/icons/onda.svg" alt="track waveform"> -->
-  </div>
-</aside>
+    <!-- SECTION: MY TRACKS LIST -->
+    <section id="myTracksSection" class="my-tracks-section">
+      <!-- Track closed -->
+      <!-- Track open -->
+    </section>
 
-<!-- MODAL FORM: ADD A NEW TRACK -->
-<div class="modal-container is-hidden">
-  <div class="modal-content">
+    <aside id="waveform-section">
+      <div class="waveform">
+        <!-- <img src="../assets/icons/onda.svg" alt="track waveform"> -->
+      </div>
+    </aside>
 
-    <!-- <div class="close-x">+</div> -->
-    <div class="form-title">Track details</div>
+    <!-- MODAL FORM: ADD A NEW TRACK -->
+    <div class="modal-container is-hidden">
+      <div class="modal-content">
 
-    <form class="trackForm">
+        <!-- <div class="close-x">+</div> -->
+        <div class="form-title">Track details</div>
 
-      <!-- <label for="title">title</label> -->
-      <input type="text" name="title" id="title" placeholder="title" class="trackTitle" required>
+        <form class="trackForm">
 
-      <!-- <label for="genre">genre</label> -->
-      <input type="text" name="genre" id="genre" placeholder="genre" class="trackGenre">
+          <!-- <label for="title">title</label> -->
+          <input type="text" name="title" id="title" placeholder="title" class="trackTitle" required>
 
-      <p>which tools have you used</p>
-      <!-- <label for="software"></label> -->
-      <input type="text" name="software" id="software" placeholder="software" class="trackSoftware">
+          <!-- <label for="genre">genre</label> -->
+          <input type="text" name="genre" id="genre" placeholder="genre" class="trackGenre" required>
 
-      <!-- <label for="hardware"></label> -->
-      <input type="text" name="hardware" id="hardware" placeholder="hardware" class="trackHardware">
+          <p>which tools have you used</p>
+          <!-- <label for="software"></label> -->
+          <input type="text" name="software" id="software" placeholder="software" class="trackSoftware">
 
-      <p>inspiration</p>
-      <!-- <label for="inspiration"></label> -->
-      <input type="text" name="inspiration" id="inspiration" placeholder="artists, songs, albums, etc"
-             class="trackInspiration">
+          <!-- <label for="hardware"></label> -->
+          <input type="text" name="hardware" id="hardware" placeholder="hardware" class="trackHardware">
 
-      <p class="upload-file-text center">ADD AUDIO FILE</p>
+          <p>inspiration</p>
+          <!-- <label for="inspiration"></label> -->
+          <input type="text" name="inspiration" id="inspiration" placeholder="artists, songs, albums, etc"
+                class="trackInspiration">
 
-      <i class="btn-round btn-round-white upload-file-btn"></i>
+          <p class="upload-file-text center">ADD AUDIO FILE</p>
 
-      <input type="submit" name="submit" value="SAVE" class="btn-long btn-add-song-save">
-    </form>
+          <i class="btn-round btn-round-white upload-file-btn"></i>
 
-  </div>
-</div>
+          <input type="submit" name="submit" value="SAVE" class="btn-long btn-add-song-save">
+        </form>
 
-<!-- NAVIGATION MENU -->
-<nav id="nav-bar">
-  <ul class="nav-bar">
-    <li id="home">
-      <a href="">
-        <img class="color-svg-white" src="../assets/icons/home.svg" alt="home">
-      </a>
-    </li>
-    <li id="profile">
-      <a href="">
-        <img class="color-svg-blue" src="../assets/icons/user.svg" alt="">
-      </a>
-    </li>
-    <li id="search">
-      <a href="">
-        <img class="color-svg-white" src="../assets/icons/loupe.svg" alt="">
-      </a>
-    </li>
-    <li id="liked-tracks">
-      <a href="">
-        <img class="color-svg-white" src="../assets/icons/heart.svg" alt="">
-      </a>
-    </li>
-    <li id="menu">
-      <a href="">
-        <img class="color-svg-white" src="../assets/icons/menu.svg" alt="">
-      </a>
-    </li>
-  </ul>
-</nav>
+      </div>
+    </div>
 
-    <script>
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = {
-        apiKey: "AIzaSyC0lhkPIeWJRcswklZGiy8Bln9xEgpcTQA",
-        authDomain: "tyli-music.firebaseapp.com",
-        databaseURL: "https://tyli-music.firebaseio.com",
-        projectId: "tyli-music",
-        storageBucket: "tyli-music.appspot.com",
-        messagingSenderId: "151998115416",
-        appId: "1:151998115416:web:a679b0e467457abf6ca42d",
-        measurementId: "G-0EJ4ECP5LM"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-    const db = firebase.firestore();
-    db.settings({ timestampsInSnapshots: true });
-    </script>
+  </main>
 
-    <script type="module" src="../js/profile.js"></script>
-    <!-- <script type="module" src="../js/firebase-firestore.js"></script> -->
+  <!-- SECTION: NAVIGATION MENU -->
+  <nav id="nav-bar">
+    <ul class="nav-bar">
+      <li id="home">
+        <a href="">
+          <img class="color-svg-white" src="../assets/icons/home.svg" alt="home">
+        </a>
+      </li>
+      <li id="profile">
+        <a href="">
+          <img class="color-svg-blue" src="../assets/icons/user.svg" alt="">
+        </a>
+      </li>
+      <li id="search">
+        <a href="#">
+          <img class="color-svg-white search-button" src="../assets/icons/loupe.svg" alt="">
+        </a>
+      </li>
+      <li id="liked-tracks">
+        <a href="">
+          <img class="color-svg-white" src="../assets/icons/heart.svg" alt="">
+        </a>
+      </li>
+      <li id="menu">
+        <a href="" id="trackGenerator">
+          <img class="color-svg-white" src="../assets/icons/menu.svg" alt="">
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+      apiKey: "AIzaSyC0lhkPIeWJRcswklZGiy8Bln9xEgpcTQA",
+      authDomain: "tyli-music.firebaseapp.com",
+      databaseURL: "https://tyli-music.firebaseio.com",
+      projectId: "tyli-music",
+      storageBucket: "tyli-music.appspot.com",
+      messagingSenderId: "151998115416",
+      appId: "1:151998115416:web:a679b0e467457abf6ca42d",
+      measurementId: "G-0EJ4ECP5LM"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  const db = firebase.firestore();
+  db.settings({ timestampsInSnapshots: true });
+  </script>
+
+  <script type="module" src="../js/profile.js"></script>
+  <script type="module" src="../js/search-bar.js"></script>
+  <!-- <script type="module" src="../js/firebase-firestore.js"></script> -->
 
 </body>
 

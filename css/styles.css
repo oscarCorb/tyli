@@ -355,6 +355,10 @@ tr {
   letter-spacing: 0.8px;
 }
 
+.trackForm  input:focus {
+  outline: none;
+}
+
 ::placeholder {
   color: #FFFFFF;
   opacity: 1;
@@ -377,3 +381,36 @@ tr {
 }
 
 
+/* ===== SEARCH BAR SECTION ===== */
+.search-bar {
+  /* display: flex; */
+  position: fixed;
+  bottom: 60px;
+}
+
+.search-bar ::placeholder {
+  color: #434449;
+  opacity: 1;
+}
+
+/* .search-form { */
+.search-bar-input {
+  display: block;
+  height: 35px;
+  border-radius: 50px;
+  border: 1px solid #38C48B;
+  margin: 0 auto;
+  padding: 4px 10px 4px 17px;
+  letter-spacing: 0.4px;
+  font-weight: normal;
+  font-family: 'Nunito', sans-serif;
+  color: #000000;
+  background-color: #FFFFFF;
+  
+  width: calc(100% - 16px);
+}
+
+.search-bar-input:focus {
+  outline: none;
+  /* box-shadow: 0px 0px 2px #0066ff; */
+}

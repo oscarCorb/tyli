@@ -4,6 +4,8 @@ import {Track} from './Track.js';
 import {TrackFirebase} from './TrackFirebase.js';
 import {makeTrackInfoCardHtml, makeTrackCardHtml} from './templates.js';
 
+// import {hideSearchBar} from './search-bar.js';
+
 // ===== CLASS instances ===== //
 // const trackCache = new TrackCache('tracks');
 // const trackList = new TrackList(trackCache);
@@ -37,6 +39,10 @@ const displayForm = () => {
   modalContainer.classList.remove('is-hidden')
   addNewTrackBtn.classList.add('is-open');
   toggleFormStatus = true;
+  hideSearchBar();
+  setTimeout(() => {
+    trackTitle.focus();
+  }, 100);
 }
 
 // close/hide form and modal window
@@ -47,22 +53,19 @@ const hideForm = () => {
   trackForm.reset();
 }
 
-// *** ESTO LO HE COPIADO Y NO LO ENTIENDO DEL TODO BIEN ***
-//
+// Nota de Fran
 /* Lo de snapshot es un manejador de eventos para cuando se producen cambios
  * en el documento en firebase (en su servidor) la razón de que se pinten 2 veces las cosas
  * es que este manejador salta más de una vez cuando se produce una edición (no sé muy bien por qué)
- **/
-const onGetTrack = (callback) => db.collection('tracks').onSnapshot(callback);
+ */
+// const onGetTrack = (callback) => db.collection('tracks').onSnapshot(callback);
 
 // print track cards
-
-  // *** ESTO TAMBIÉN. El caso es que sin esta línea no se imprimen
-  // *** los nuevos tracks en pantalla, hay que recargar el navegador
 const printDB = async (trackId) => {
   const myTracks = await trackFirebase.getTracks()
   myTracksSection.innerHTML = '';
   myTracks.forEach(track => makeTrackCard(track, trackId));
+  hideSearchBar();
 }
 
 printDB();
@@ -117,7 +120,7 @@ const registerEventListeners = (div) => {
 const trackInfoEditBtn = async () => {
   displayForm();
 
-  // código de Fran, tengo que adaptarlo
+  // nuevo código de Fran, tengo que adaptarlo
   // const tracks = await trackFirebase.getTracks();
   // const trackIndex = tracks.findIndex(track => track.id === parseInt(idTrackToEdit, 10));
   // trackToEdit = tracks[trackIndex];
@@ -125,7 +128,7 @@ const trackInfoEditBtn = async () => {
   // filledOutEditForm();
 
   // search in DB which track matches argument
-  const tracks = await trackFirebase.getTracks()
+  const tracks = await trackFirebase.getTracks();
   const trackToEdit = tracks.find(track => track.id === parseInt(idTrackToEdit, 10))
   filledOutEditForm(trackToEdit)
   return trackToEdit;
@@ -133,8 +136,9 @@ const trackInfoEditBtn = async () => {
 
 // auto-filled out form when click on edit track button
 const filledOutEditForm = (trackToEdit) => {
+  
   const trackEntries = Object.entries(trackToEdit);
-  console.log(trackEntries)
+  
   for (const track of trackEntries) {
     switch (track[0]) {
       case 'title':
@@ -196,9 +200,120 @@ myTracksSection.addEventListener('click', async (e) => {
   }
 });
 
+export {
+  trackFirebase
+}
+
 // console.log(e.target.innerText);
 
 // ideal improves:
 // ESC key should also close forms
 // modal form should be 'New track details' or 'Edit track details'
 // sort out card overflowing text
+
+
+
+// ===== SEARCH BAR SECTION ===== //
+// * * * * mover a oto archivo * * * *
+
+// global variables
+const searchButton = document.querySelector('#search');
+const searchBar = document.querySelector('#search-bar');
+const input = document.querySelector('.search-bar-input');
+const form = document.querySelector('.search-form');
+
+// functions
+
+// display search bar when click on loupe button
+const displaySearchBar = () => {
+    // myTracksSection.innerHTML = '';
+    searchBar.classList.remove('is-hidden');
+    input.value = '';
+    input.focus();
+}
+
+// hide search bar when 
+const hideSearchBar = () => {
+    searchBar.classList.add('is-hidden');
+}
+
+const searchTracks = async (searchText) => {
+
+  const tracksMatch = [];
+  const myTracks = await trackFirebase.getTracks();
+
+  myTracks.forEach((track) => {
+    if (track.title.toLowerCase().includes(searchText)) {
+      tracksMatch.push(track);
+    } /* else {
+      myTracksSection.innerHTML = `
+        <div>
+          'No matches :('
+        </div>
+      `;
+    } */
+  });
+
+  myTracksSection.innerHTML = '';
+  tracksMatch.forEach(track => makeTrackCard(track));
+}
+
+// events
+searchButton.addEventListener('click', () => {
+    if (searchBar.classList.contains('is-hidden')) {
+      displaySearchBar();
+    } else {
+        hideSearchBar();
+    }
+});
+
+form.addEventListener('keyup', (e) => {
+  const searchText = e.target.value.toLowerCase();
+  searchTracks(searchText);
+});
+
+// // Tracks de ejemplo autogenerados para pruebas:
+// const track1 = new Track('Digital Tsunami', 'Electronic', 'Cubase', 'Korg Electribe EMX', 'Drexciya');
+// const track2 = new Track('Tunnel', 'Minimal Techno', 'Ableton Live 8', 'DS Tempest', 'Richie Hawtin');
+// const track3 = new Track('Grey fades to green', 'Techno', 'Ableton Live', 'Access Virus', 'Óscar Mulero');
+// const track4 = new Track('Twoism', 'IDM, Ambient', 'FL Studio', 'DS Prophet', 'Boards of Canada');
+// const track5 = new Track('Fivo', 'Hard Techno', 'FL Studio', 'Logic Pro', 'Surgeon');
+// const track6 = new Track('Fivo', 'Electronic, Ambient', 'Ableton Live', 'Mopho synthesizer', 'Plastikman');
+// const track7 = new Track('exHale', 'Electronic, Ambient', 'Ableton Live', 'Mopho synthesizer', 'Plastikman');
+// const track8 = new Track('Welcome to the Future', 'Drum & Bass', 'Reaper', 'Moog modular synthesizer', 'Logistics');
+// const track9 = new Track('Wayfaring stranger', 'Dubstep', 'Reason', 'Elektron Digitone', 'Burial');
+// const track10 = new Track('We are Sheffield', 'Techno, Ambient, IDM', 'Bitwig studio', 'Korg Prologue', 'The Black Dog');
+
+// // funciones
+// const cleanTracks = async() => {
+//   const myTracks = await trackFirebase.getTracks();
+//   myTracks.forEach(track => {
+//     trackFirebase.deleteTrack(track.id.toString());
+//   });
+// }
+
+// const tracksGenerator = async () => {
+
+//   myTracksSection.innerHTML = '';
+
+//   const track_1  = await trackFirebase.addTrack(track1);
+//   const track_2  = await trackFirebase.addTrack(track2);
+//   const track_3  = await trackFirebase.addTrack(track3);
+//   const track_4  = await trackFirebase.addTrack(track4);
+//   const track_5  = await trackFirebase.addTrack(track5);
+//   const track_6  = await trackFirebase.addTrack(track6);
+//   const track_7  = await trackFirebase.addTrack(track7);
+//   const track_8  = await trackFirebase.addTrack(track8);
+//   const track_9  = await trackFirebase.addTrack(track9);
+//   const track_10 = await trackFirebase.addTrack(track10);
+
+//   const myTracks = await trackFirebase.getTracks();
+// }
+
+// const tracksGeneratorBtn = document.querySelector('#trackGenerator');
+
+// tracksGeneratorBtn.addEventListener('click', (e) => {
+//   e.preventDefault();
+//   cleanTracks();
+//   tracksGenerator();
+// });
